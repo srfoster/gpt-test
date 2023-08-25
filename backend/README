@@ -1,5 +1,12 @@
-To run server
+##To install using pip & Python:
+```
+pip install -U Flask
+pip install -U Flask-SQLAlchemy
+pip install Flask-Migrate
+```
+
+##To run server
 
 ```
-python3 app.py
+python app.py
 ```

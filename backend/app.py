@@ -1,8 +1,8 @@
 import os
+import json
 from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
 
 app = Flask(__name__, static_folder='../frontend/hello-world-angular/dist/hello-world-angular')
 
@@ -19,25 +19,30 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email
+        }
+
     def __repr__(self):
-        return f'<User {self.username}>'
-
-
-
+        return self.username + " - " + self.email
 
 @app.route('/add_user/<username>/<email>')
 def add_user(username, email):
     user = User(username=username, email=email)
     db.session.add(user)
     db.session.commit()
-    return f"User {username} added!"
-
+    return "User {username} added!"
 
 @app.route('/list_users')
 def list_users():
     print("Listing users")
     users = User.query.all()
-    return '<br>'.join(str(user) for user in users)
+    print(users)
+    users_json = json.dumps([user.to_dict() for user in users])
+    return users_json
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -49,4 +54,3 @@ def serve(path):
 
 if __name__ == '__main__':
     app.run()
-
