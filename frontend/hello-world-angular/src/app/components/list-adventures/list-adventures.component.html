@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Adventures</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Mileage</th>
+        <th>Estimated Calories</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let adventure of adventures">
+        <td>{{ adventure.date }}</td>
+        <td>{{ adventure.category }}</td>
+        <td>{{ adventure.mileage }}</td>
+        <td>{{ adventure.estimated_calories }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -80,7 +80,7 @@ def add_adventure():
     try:
         data = request.json
 
-        user_id = data['user_id']
+        user_id = 1 #data['user_id']
         user = session.query(User).filter(User.id == user_id).first()
         
         if not user:

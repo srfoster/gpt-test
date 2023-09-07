@@ -22,7 +22,7 @@ export class AddAdventureComponent implements OnInit {
 
   onSubmit(): void {
     // Replace with your backend API endpoint
-    const apiUrl = 'http://127.0.0.1:5000/add_adventure';
+    const apiUrl = 'http://localhost:5000/add_adventure';
     this.http.post(apiUrl, this.adventure).subscribe(response => {
       console.log(response);  // Handle response from your backend API
     }, error => {
